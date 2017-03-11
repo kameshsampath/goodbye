@@ -29,12 +29,12 @@ data:
                       "routes": [
                         {
                           "timeout_ms": 0,
-                          "prefix": "/goodbye",
+                          "prefix": "/api/goodbye",
                           "cluster": "local_service"
                         },
                         {
                           "timeout_ms": 0,
-                          "prefix": "/nap",
+                          "prefix": "/api/nap",
                           "cluster": "local_service"
                         }
                       ]
