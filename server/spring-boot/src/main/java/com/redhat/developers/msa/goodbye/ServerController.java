@@ -16,36 +16,39 @@
  */
 package com.redhat.developers.msa.goodbye;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.servlet.ServletException;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @RestController
 @RequestMapping("/api")
 public class ServerController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServerController.class);
+
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/goodbye", produces = "text/plain")
     public String goodbye() throws ServletException {
-        String msg = "Goodbye on " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date()); 
-        System.out.println(msg);
+        String msg = "Goodbye on " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date());
+        LOGGER.info(msg);
         return msg;
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/nap", produces = "text/plain")
     public String goodbyeNap() throws ServletException, InterruptedException {
-        System.out.println("Received request on Thread: " + Thread.currentThread().getName());
+        LOGGER.info("Received request on Thread: " + Thread.currentThread().getName());
         // Sleep 30 seconds
         // Thread.sleep(30000);
         Pi.computePi(20000);
-        System.out.println("Back from the nap");
+        LOGGER.info("Back from the nap");
         return "Nap from " + new Date().toString();
     }
 
