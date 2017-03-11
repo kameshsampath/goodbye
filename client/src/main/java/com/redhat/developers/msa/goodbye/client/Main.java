@@ -3,7 +3,7 @@
  * Copyright 2016, Red Hat, Inc. and/or its affiliates, and individual
  * contributors by the @authors tag. See the copyright.txt in the
  * distribution for a full listing of individual contributors.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,15 +18,15 @@ package com.redhat.developers.msa.goodbye.client;
 
 public class Main {
 
-    private static final int NUMBER_THREADS = 210;
+    private static final int NUMBER_THREADS = 100;
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Starting Threads");
         for (int x = 0; x < NUMBER_THREADS; x++) {
             Thread.sleep(20);
             // new ApacheClientGoodbye().start();
-            new ApacheClient().start();
-            // new TimeoutApacheClient().start();
+            //new ApacheClient(args[0]).start();
+            new TimeoutApacheClient(args[0]).start();
             // new HystrixClient().start();
         }
         System.out.println(NUMBER_THREADS + " Threads running...");

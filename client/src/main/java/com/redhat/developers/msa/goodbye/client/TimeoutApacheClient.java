@@ -3,7 +3,7 @@
  * Copyright 2016, Red Hat, Inc. and/or its affiliates, and individual
  * contributors by the @authors tag. See the copyright.txt in the
  * distribution for a full listing of individual contributors.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,10 +27,21 @@ public class TimeoutApacheClient extends Thread {
     // Timeout in millis.
     private static final int CONNECTION_TIMEOUT_MS = 1000;
 
+    private String url = "http://localhost:8080/api/nap";
+
+    public TimeoutApacheClient() {
+    }
+
+    public TimeoutApacheClient(String url) {
+        if (null != url && url.trim().length() > 0) {
+            this.url = url;
+        }
+    }
+
     public void run() {
 
         // Apache HTTPClient creation
-        HttpGet httpGet = new HttpGet("http://localhost:8080/api/nap");
+        HttpGet httpGet = new HttpGet(url);
         HttpClient httpClient = HttpClientBuilder.create().build();
 
         // Timeout configuration
